@@ -78,3 +78,15 @@ header .container {
   border-radius: 8px;
   padding: 1rem;
 }
+
+#btnAgregar:hover {
+  cursor: url("imagenes/click_10698344.png"), pointer;
+}
+
+#tabIngresos:hover {
+  cursor: url("imagenes/icons8-cursor-32.png"), pointer;
+}
+
+#tabEgresos:hover {
+  cursor: url("imagenes/icons8-cursor-32.png"), pointer;
+}
