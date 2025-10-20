@@ -134,10 +134,14 @@ function renderCabecera() {
   totalEgrElem.textContent = fmt(-totalEgr);
   totalEgrElem.className = `font-weight-bold ${totalEgr >= 0 ? 'text-warning' : 'text-danger'}`;
 
-  // Presupuesto
+ // Presupuesto
   const presElem = $('#presupuestoTotal');
-  presElem.textContent = (presupuesto >= 0 ? '+ ' : '- ') + two(Math.abs(presupuesto));
-  presElem.className = `display-4 font-weight-bold ${presupuesto >= 0 ? 'text-success' : 'text-danger'}`;
+  presElem.textContent = (presupuesto > 0 ? '+ ' : presupuesto < 0 ? '- ' : '') + two(Math.abs(presupuesto));
+  presElem.className = `display-4 font-weight-bold ${presupuesto > 0 ? 'text-success' :
+      presupuesto < 0 ? 'text-danger' :
+        'text-white'  
+    }`;
+
 
 
   // % Gastos = Egresos * 100 / Ingresos
@@ -253,4 +257,5 @@ $('#tabEgresos').addEventListener('click', () => activarTab('egresos'));
 document.addEventListener('DOMContentLoaded', () => {
   activarTab('ingresos'); // por defecto
   renderTodo();
+
 });
