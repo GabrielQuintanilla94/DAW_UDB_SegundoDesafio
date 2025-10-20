@@ -13,14 +13,107 @@ const estado = {
 // =========================
 // Inicialización de cabecera
 // =========================
-function nombreMes(fecha = new Date()) {
+// Fecha actual usada por la cabecera (mes/año seleccionados)
+let fechaActual = new Date();
+
+// Devuelve nombre del mes y año (usa fechaActual por defecto)
+function nombreMes(fecha = fechaActual) {
   const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   const m = meses[fecha.getMonth()];
   const y = fecha.getFullYear();
-  // Capitalizar (como en el mockup)
   const mesCap = m.charAt(0).toUpperCase() + m.slice(1);
   return `${mesCap} ${y}`;
 }
+
+// Fija la fecha actual y actualiza la UI
+function setFecha(fecha) {
+  fechaActual = new Date(fecha.getFullYear(), fecha.getMonth(), 1);
+  // Actualiza selects/inputs si existen
+  const sel = $('#mesSelect');
+  const yinput = $('#yearInput');
+  if (sel) sel.value = String(fechaActual.getMonth());
+  if (yinput) yinput.value = String(fechaActual.getFullYear());
+  // Re-render de cabecera (y listas si en el futuro dependieran de la fecha)
+  renderCabecera();
+}
+
+// Cambia mes por delta (puede ser negativo)
+function cambiarMes(delta) {
+  const f = new Date(fechaActual);
+  f.setMonth(f.getMonth() + delta);
+  setFecha(f);
+}
+
+// Cambia año por delta
+function cambiarAno(delta) {
+  const f = new Date(fechaActual);
+  f.setFullYear(f.getFullYear() + delta);
+  setFecha(f);
+}
+
+// Inicializa controles para cambiar mes/año (si existen en el DOM)
+function initControlesMes() {
+  // Botones prev/next (ids: mesPrev, mesNext)
+  const prev = $('#mesPrev');
+  const next = $('#mesNext');
+  if (prev) prev.addEventListener('click', () => cambiarMes(-1));
+  if (next) next.addEventListener('click', () => cambiarMes(1));
+
+  // Select de meses (id: mesSelect) - opciones 0..11
+  const sel = $('#mesSelect');
+  if (sel) {
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    sel.innerHTML = meses.map((m, i) => `<option value="${i}">${m}</option>`).join('');
+    sel.value = String(fechaActual.getMonth());
+    sel.addEventListener('change', (e) => {
+      const newMonth = Number(e.target.value);
+      const f = new Date(fechaActual);
+      f.setMonth(newMonth);
+      setFecha(f);
+    });
+  }
+
+  // Input de año (id: yearInput)
+  const yinput = $('#yearInput');
+  if (yinput) {
+    yinput.value = String(fechaActual.getFullYear());
+    yinput.addEventListener('change', (e) => {
+      const y = parseInt(e.target.value, 10);
+      if (Number.isFinite(y)) {
+        const f = new Date(fechaActual);
+        f.setFullYear(y);
+        setFecha(f);
+      }
+    });
+  }
+
+  // Click en el título para cambiar mes/año por prompt (fallback)
+  const titulo = $('#tituloMes');
+  if (titulo) {
+    titulo.addEventListener('click', () => {
+      const entrada = prompt('Ingrese mes y año en formato MM-YYYY (ej: 04-2025):', `${String(fechaActual.getMonth()+1).padStart(2,'0')}-${fechaActual.getFullYear()}`);
+      if (!entrada) return;
+      const m = entrada.split('-').map(s => s.trim());
+      if (m.length === 2) {
+        const mm = parseInt(m[0], 10);
+        const yy = parseInt(m[1], 10);
+        if (Number.isFinite(mm) && Number.isFinite(yy) && mm >= 1 && mm <= 12) {
+          setFecha(new Date(yy, mm - 1, 1));
+        } else {
+          alert('Formato inválido.');
+        }
+      } else {
+        alert('Formato inválido.');
+      }
+    });
+  }
+
+  // Render inicial de cabecera para sincronizar texto/controles
+  renderCabecera();
+}
+
+// Inicializar controles cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', initControlesMes);
 
 function renderCabecera() {
   // Título
