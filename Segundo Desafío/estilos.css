@@ -1,4 +1,6 @@
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
 
 .resumen-box {
   background: #f7f7f9;
@@ -27,6 +29,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   outline: none;
   cursor: pointer;
 }
+
 .tab-btn.active {
   background: #343a40;
   color: #fff;
@@ -51,4 +54,27 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
   font-size: .75rem;
 }
 
-.d-none { display: none !important; }
+.d-none {
+  display: none !important;
+}
+
+
+
+header {
+  background-image: url("imagenes/ONZ74M0.jpg");
+  background-size: contain;
+  /* hace que se escale proporcionalmente */
+  background-position: center;
+  /* centra la imagen */
+  background-repeat: no-repeat;
+  /* evita repeticiones */
+  color: white;
+  /* mejora contraste del texto */
+}
+
+header .container {
+  background-color: rgba(0, 0, 0, 0.4);
+  /* capa semitransparente sobre la imagen */
+  border-radius: 8px;
+  padding: 1rem;
+}

@@ -7,7 +7,7 @@ const fmt = (n) => (Number(n) >= 0 ? `+ ${two(n)}` : `- ${two(Math.abs(n))}`);
 
 const estado = {
   ingresos: [], // {desc, monto}
-  egresos : []  // {desc, monto}
+  egresos: []  // {desc, monto}
 };
 
 // =========================
@@ -18,7 +18,7 @@ let fechaActual = new Date();
 
 // Devuelve nombre del mes y año (usa fechaActual por defecto)
 function nombreMes(fecha = fechaActual) {
-  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   const m = meses[fecha.getMonth()];
   const y = fecha.getFullYear();
   const mesCap = m.charAt(0).toUpperCase() + m.slice(1);
@@ -62,7 +62,7 @@ function initControlesMes() {
   // Select de meses (id: mesSelect) - opciones 0..11
   const sel = $('#mesSelect');
   if (sel) {
-    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     sel.innerHTML = meses.map((m, i) => `<option value="${i}">${m}</option>`).join('');
     sel.value = String(fechaActual.getMonth());
     sel.addEventListener('change', (e) => {
@@ -91,7 +91,7 @@ function initControlesMes() {
   const titulo = $('#tituloMes');
   if (titulo) {
     titulo.addEventListener('click', () => {
-      const entrada = prompt('Ingrese mes y año en formato MM-YYYY (ej: 04-2025):', `${String(fechaActual.getMonth()+1).padStart(2,'0')}-${fechaActual.getFullYear()}`);
+      const entrada = prompt('Ingrese mes y año en formato MM-YYYY (ej: 04-2025):', `${String(fechaActual.getMonth() + 1).padStart(2, '0')}-${fechaActual.getFullYear()}`);
       if (!entrada) return;
       const m = entrada.split('-').map(s => s.trim());
       if (m.length === 2) {
@@ -124,9 +124,21 @@ function renderCabecera() {
   const totalEgr = totalEgresos();
   const presupuesto = totalIng - totalEgr;
 
-  $('#totalIngresos').textContent = fmt(totalIng);
-  $('#totalEgresos').textContent  = fmt(-totalEgr); // muestra con signo negativo
-  $('#presupuestoTotal').textContent = (presupuesto >= 0 ? '+ ' : '- ') + two(Math.abs(presupuesto));
+  // Ingresos
+  const totalIngElem = $('#totalIngresos');
+  totalIngElem.textContent = fmt(totalIng);
+  totalIngElem.className = `font-weight-bold ${totalIng >= 0 ? 'text-info' : 'text-danger'}`;
+
+  // Egresos
+  const totalEgrElem = $('#totalEgresos');
+  totalEgrElem.textContent = fmt(-totalEgr);
+  totalEgrElem.className = `font-weight-bold ${totalEgr >= 0 ? 'text-warning' : 'text-danger'}`;
+
+  // Presupuesto
+  const presElem = $('#presupuestoTotal');
+  presElem.textContent = (presupuesto >= 0 ? '+ ' : '- ') + two(Math.abs(presupuesto));
+  presElem.className = `display-4 font-weight-bold ${presupuesto >= 0 ? 'text-success' : 'text-danger'}`;
+
 
   // % Gastos = Egresos * 100 / Ingresos
   let pct = 0;
@@ -138,7 +150,7 @@ function renderCabecera() {
 // Totales
 // =========================
 const totalIngresos = () => estado.ingresos.reduce((acc, t) => acc + Number(t.monto), 0);
-const totalEgresos  = () => estado.egresos.reduce((acc, t) => acc + Number(t.monto), 0);
+const totalEgresos = () => estado.egresos.reduce((acc, t) => acc + Number(t.monto), 0);
 
 // =========================
 // Render de listas
@@ -218,8 +230,8 @@ $('#formTransaccion').addEventListener('submit', (e) => {
 
   const tx = { desc, monto: Number(two(monto)) }; // redondeo con toFixed(2)
 
-  if (tipo === 'ingreso')  estado.ingresos.unshift(tx);
-  if (tipo === 'egreso')   estado.egresos.unshift(tx);
+  if (tipo === 'ingreso') estado.ingresos.unshift(tx);
+  if (tipo === 'egreso') estado.egresos.unshift(tx);
 
   // Render
   renderTodo();

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aplicación de presupuesto</title>
 
   <!-- Bootstrap 4 solo para estilos -->
-  <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="estilos.css">
+
 </head>
+
 <body class="bg-light">
 
   <header class="py-4 bg-white shadow-sm mb-4">
@@ -54,13 +56,15 @@
 
               <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <input id="descripcion" class="form-control" type="text" placeholder="Ej.: Salario / Supermercado" required>
+                <input id="descripcion" class="form-control" type="text" placeholder="Ej.: Salario / Supermercado"
+                  required>
               </div>
 
               <div class="form-group">
                 <label for="monto">Monto</label>
                 <input id="monto" class="form-control" type="number" min="0.01" step="any" placeholder="0.00" required>
-                <small class="form-text text-muted">Use punto para decimales. Se redondea con <code>toFixed(2)</code>.</small>
+                <small class="form-text text-muted">Use punto para decimales. Se redondea con
+                  <code>toFixed(2)</code>.</small>
               </div>
 
               <button class="btn btn-primary btn-block" type="submit">Agregar</button>
@@ -75,12 +79,12 @@
           <div class="card-body">
             <div class="tabs mb-3">
               <button id="tabIngresos" class="tab-btn active">Ingresos</button>
-              <button id="tabEgresos"  class="tab-btn">Egresos</button>
+              <button id="tabEgresos" class="tab-btn">Egresos</button>
             </div>
 
             <!-- Listas -->
             <div id="listaIngresos" class="lista"></div>
-            <div id="listaEgresos"  class="lista d-none"></div>
+            <div id="listaEgresos" class="lista d-none"></div>
           </div>
         </div>
       </section>
@@ -93,4 +97,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>
