@@ -1,0 +1,141 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.resumen-box {
+  background: #f7f7f9;
+  border: 1px solid #e5e5e9;
+  border-radius: .25rem;
+  padding: .5rem .75rem;
+  min-width: 140px;
+  text-align: center;
+}
+/* Diseño cuadros de resumen de ingresos y egresos */
+/* Cuadro de Ingresos*/
+.resumen-box:first-child {
+    background: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+    padding: .5rem .75rem;
+    border-radius: 6px;
+}
+
+#listaIngresos {
+    background: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+#listaIngresos, #listaIngresos * {
+    color: #000000 !important;
+}
+
+.tabsIngresos {
+  display: flex;
+  background: #eef0f3;
+  border-radius: .5rem;
+  padding: .25rem;
+}
+
+.tab-btn {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: .6rem .75rem;
+  font-weight: 600;
+  color: #6c757d;
+  border-radius: .4rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #343a40;
+  color: #fff;
+}
+
+/* Cuadro de Egresos */
+.resumen-box:last-child {
+    background: #000000;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    padding: .5rem .75rem;
+    border-radius: 6px;
+}
+
+#listaEgresos {
+    background: #000000;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+#listaEgresos, #listaEgresos * {
+    color: #ffffff !important;
+}
+
+/* Ajustar estilos de los ítems dentro de la lista de egresos (para sobrescribir .lista .item) */
+#listaEgresos .item {
+    background: #0b0b0b;
+    border-color: #444444;
+    color: #ffffff;
+}
+
+.lista .item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e5e7eb;
+  border-radius: .4rem;
+  padding: .6rem .8rem;
+  margin-bottom: .5rem;
+  background: #fff;
+}
+
+.badge-pill-dark {
+  background: #343a40;
+  color: #fff;
+  border-radius: 999px;
+  padding: .15rem .45rem;
+  font-size: .75rem;
+}
+
+.d-none {
+  display: none !important;
+}
+
+
+
+header {
+  background-image: url("imagenes/ONZ74M0.jpg");
+  background-size: contain;
+  /* hace que se escale proporcionalmente */
+  background-position: center;
+  /* centra la imagen */
+  background-repeat: no-repeat;
+  /* evita repeticiones */
+  color: white;
+  /* mejora contraste del texto */
+}
+
+header .container {
+  background-color: rgba(0, 0, 0, 0.4);
+  /* capa semitransparente sobre la imagen */
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+#btnAgregar:hover {
+  cursor: url("imagenes/click_10698344.png"), pointer;
+}
+
+#tabIngresos:hover {
+  cursor: url("imagenes/icons8-cursor-32.png"), pointer;
+}
+
+#tabEgresos:hover {
+  cursor: url("imagenes/icons8-cursor-32.png"), pointer;
+}
